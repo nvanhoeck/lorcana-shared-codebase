@@ -1,0 +1,6 @@
+export * from './calculateAvg'
+export * from './countByValue'
+export * from './shuffleArray'
+export * from './transferElements'
+export * from './resetInktotal'
+export * from './setupHandAndShuffleDeck'
