@@ -3,7 +3,8 @@ export const actions = [
     "CHALLENGE",
     "QUEST",
     "PLAY_CARD",
-    "END_TURN"
+    "END_TURN",
+    "SING"
 ] as const;
 
 export type Actions = typeof actions[number]; // Extract the union of literal types from the array.
