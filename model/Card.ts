@@ -20,7 +20,7 @@ export const isKeywordAbility = (c: AbilityObject): c is KeywordAbility => {
 }
 
 export type StaticAbility = {
-    name: string,
+    name: 'VOICELESS',
     type: "static"
 }
 
@@ -29,7 +29,7 @@ export const isStaticAbility = (c: AbilityObject): c is StaticAbility => {
 }
 
 export type TriggeredAbility = {
-    name: string,
+    name: 'MUSICAL DEBUT',
     type: "triggered"
 }
 export const isTriggeredAbility = (c: AbilityObject): c is TriggeredAbility => {
