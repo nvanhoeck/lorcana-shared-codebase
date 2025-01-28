@@ -1,4 +1,4 @@
-import {Card} from "../model/Card";
+import type {Card} from "../model/Card";
 import {findOptimalSinger} from "./optimalSinger";
 import {transferElement} from "./transferElements";
 
