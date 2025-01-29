@@ -8,5 +8,5 @@ export const canSing = (c: Card) => c.readied && c.type === 'Character' && notVo
 
 export const singCostThreshold = (c: Card, cost: number) => {
     const singerAbility = c.abilities.find((a) => isKeywordAbility(a) && a.keyword === 'Singer') as KeywordAbility
-    return c.inkCost >= cost || singerAbility ? singerAbility.keywordValueNumber >= cost : false
+    return c.inkCost >= cost || (!!singerAbility ? singerAbility.keywordValueNumber >= cost : false)
 }
