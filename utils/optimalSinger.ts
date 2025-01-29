@@ -1,20 +1,12 @@
-import {Card, isKeywordAbility, isStaticAbility, KeywordAbility} from "../model/Card";
+import {type Card} from "../model/Card";
+import {canSing, singCostThreshold} from "../model/abilities/canSing";
 
-const notVoiceless = (c: Card) => {
-    return !c.abilities.find((a) => isStaticAbility(a) && a.name === 'VOICELESS')
-}
-
-const canSing = (c: Card) => c.type === 'Character' && notVoiceless(c);
-
-const singCostThreshold = (c: Card, cost: number) => {
-    const singerAbility = c.abilities.find((a) => isKeywordAbility(a) && a.keyword === 'Singer') as KeywordAbility
-    return c.inkCost >= cost || singerAbility ? singerAbility.keywordValueNumber >= cost : false
-}
 
 export const findOptimalSinger = (row: Card[], singCost: number) => {
     let card = row
         .filter((c) => canSing(c) && singCostThreshold(c, singCost))
         .reduce((closestCard, currentCard) => {
+            console.log(currentCard)
             const currentDiff = Math.abs(currentCard.inkCost - singCost);
             const closestDiff = Math.abs(closestCard.inkCost - singCost);
 
@@ -30,5 +22,9 @@ export const findOptimalSinger = (row: Card[], singCost: number) => {
 
             return closestCard;
         }, row[0]); // Start with the first card in the row as the initial closest card
-    return row.indexOf(card)
+    if(card && canSing(card) && singCostThreshold(card, singCost)) {
+        return row.indexOf(card)
+    } else {
+        return -1
+    }
 };

@@ -13,5 +13,6 @@ export const singASongCard = (hand: Card[], activeRow: Card[], cardIdx: number, 
         activeRow[optimalSingerIdx].readied = false
     }
     transferElement(hand, banishedPile, cardIdx)
+    console.log(newInkTotal)
     return newInkTotal
 }
