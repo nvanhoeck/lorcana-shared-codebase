@@ -1,7 +1,42 @@
 import type {Sphere} from "./Sphere";
-export type CardType = 'Character' | 'Action' | 'Song' | 'Item' | 'Location'
-export type Keywords = 'Challenger' | 'Shift' | 'Bodyguard' | 'Singer' | 'Support' | 'Rush' | 'Evasive' | 'Ward' | 'Reckless'
 
+export type CardType = 'Character' | 'Action' | 'Song' | 'Item' | 'Location'
+export type Keywords =
+    'Challenger'
+    | 'Shift'
+    | 'Bodyguard'
+    | 'Singer'
+    | 'Support'
+    | 'Rush'
+    | 'Evasive'
+    | 'Ward'
+    | 'Reckless'
+
+export type SubType =
+    "Storyborn"
+    | "Hero"
+    | "Princess"
+    | "Song"
+    | "Musketeer"
+    | "Floodborn"
+    | "Villain"
+    | "King"
+    | "Deity"
+    | "Ally"
+    | "Dreamborn"
+    | "Pirate"
+    | "Prince"
+    | "Alien"
+    | "Queen"
+    | "Sorcerer"
+    | "Broom"
+    | "Mentor"
+    | "Fairy"
+    | "Inventor"
+    | "Captain"
+    | "Dragon"
+    | "Tigger"
+    | "Detective"
 
 type AbilityObject = {
     type: "keyword" | "static" | "triggered" | "activated"
@@ -38,7 +73,7 @@ export const isTriggeredAbility = (c: AbilityObject): c is TriggeredAbility => {
 
 
 export type ActivatedAbility = {
-    name: string,
+    name: 'A WONDERFUL DREAM',
     type: "activated"
 }
 
@@ -65,4 +100,5 @@ export type Card = {
     canBeReadiedDuringReadyPhase: boolean
     damage: number
     abilities: (KeywordAbility | StaticAbility | TriggeredAbility | ActivatedAbility) []
+    subTypes: SubType[]
 }
