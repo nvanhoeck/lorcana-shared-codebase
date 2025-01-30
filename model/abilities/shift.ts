@@ -3,12 +3,11 @@ import type {Player} from "../Player";
 import {defineCardAmountRange, type PlayerGameState} from "../ai/State";
 import {transferElement} from "../../utils";
 
-export const shift = (hand: Card[], activeRow: Card[], banishedPile: Card[], cardToPlayIdx: number, cardToPlayUponIdx: number) => {
-    const cardToShift = hand[cardToPlayIdx]
-    const cardToBeShifted = activeRow[cardToPlayUponIdx]
-    cardToShift.readied = cardToBeShifted.readied
-    cardToShift.damage = cardToBeShifted.damage
-    cardToShift.canBeReadiedDuringReadyPhase = cardToBeShifted.canBeReadiedDuringReadyPhase
+export const shift = (player: Player, hand: Card[], activeRow: Card[], banishedPile: Card[], cardToPlayIdx: number, cardToPlayUponIdx: number) => {
+    player.inkTotal = player.inkTotal - shiftCost(hand[cardToPlayIdx])
+    hand[cardToPlayIdx].readied = activeRow[cardToPlayUponIdx].readied
+    hand[cardToPlayIdx].damage = activeRow[cardToPlayUponIdx].damage
+    hand[cardToPlayIdx].canBeReadiedDuringReadyPhase = activeRow[cardToPlayUponIdx].canBeReadiedDuringReadyPhase
     transferElement(activeRow, banishedPile, cardToPlayUponIdx)
     transferElement(hand, activeRow, cardToPlayIdx)
 }

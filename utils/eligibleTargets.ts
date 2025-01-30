@@ -1,4 +1,4 @@
-import {Card, isKeywordAbility} from "../model/Card";
+import {type Card, isKeywordAbility} from "../model/Card";
 
 export const eligibleTargets = (opposingActiveRow: Card[]) => {
     if(opposingActiveRow.find((c) => !c.readied && c.abilities.find((a) => isKeywordAbility(a) && a.keyword === 'Bodyguard'))) {

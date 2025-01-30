@@ -6,7 +6,6 @@ export const findOptimalSinger = (row: Card[], singCost: number) => {
     let card = row
         .filter((c) => canSing(c) && singCostThreshold(c, singCost))
         .reduce((closestCard, currentCard) => {
-            console.log(currentCard)
             const currentDiff = Math.abs(currentCard.inkCost - singCost);
             const closestDiff = Math.abs(closestCard.inkCost - singCost);
 

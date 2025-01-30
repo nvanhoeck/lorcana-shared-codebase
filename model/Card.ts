@@ -55,7 +55,7 @@ export const isKeywordAbility = (c: AbilityObject): c is KeywordAbility => {
 }
 
 export type StaticAbility = {
-    name: 'VOICELESS',
+    name: 'VOICELESS' | "SINISTER PLOT",
     type: "static"
 }
 
@@ -101,4 +101,9 @@ export type Card = {
     damage: number
     abilities: (KeywordAbility | StaticAbility | TriggeredAbility | ActivatedAbility) []
     subTypes: SubType[]
+    statChanges: {
+        strength: number
+        willpower: number
+        lore: number
+    }
 }
