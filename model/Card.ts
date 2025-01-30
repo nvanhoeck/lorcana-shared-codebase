@@ -64,7 +64,7 @@ export const isStaticAbility = (c: AbilityObject): c is StaticAbility => {
 }
 
 export type TriggeredAbility = {
-    name: 'MUSICAL DEBUT',
+    name: 'MUSICAL DEBUT' | 'WELL OF SOULS',
     type: "triggered"
 }
 export const isTriggeredAbility = (c: AbilityObject): c is TriggeredAbility => {
