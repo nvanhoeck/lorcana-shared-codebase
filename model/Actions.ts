@@ -1,4 +1,5 @@
 export const actions = [
+    "SHIFT",
     "INK_CARD",
     "CHALLENGE",
     "QUEST",

@@ -1,5 +1,5 @@
 import {revealFromDeck} from "../../utils/revealFromDeck";
-import {Card} from "../Card";
+import {type Card} from "../Card";
 import {shuffleArray} from "../../utils";
 
 export const musicalDebut = (deck: Card[]) => {
