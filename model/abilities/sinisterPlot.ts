@@ -5,5 +5,5 @@ export const sinisterPlot = (activeRow: Card[], waitingRow: Card[], card: Card) 
     const allVillainsInWaitingRow = waitingRow.filter((c) => c.subTypes.includes('Villain')).length
     const doNotCountItself = 1
     debugger
-    card.statChanges.lore += allVillainsInActiveRow + allVillainsInWaitingRow - doNotCountItself
+    card.statChanges.lore = allVillainsInActiveRow + allVillainsInWaitingRow - doNotCountItself
 }
