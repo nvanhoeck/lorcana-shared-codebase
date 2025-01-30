@@ -13,7 +13,7 @@ export const shiftCharacterCard = (player: Player, hand: Card[], activeRow: Card
         throw new Error("Trying to shift while not having enough ink")
     }
     if ((shiftAbility as KeywordAbility).keywordValueNumber <= inkwell) {
-        shift(player, hand, activeRow, banishedPile, cardToBePlayedUponIdx, cardToBePlayedUponIdx)
+        shift(player, cardToBePlayedUponIdx, cardToBePlayedUponIdx)
         return inkwell - shiftCost(cardToBePlayed)
     } else {
         throw new Error(`Cannot shift ${cardToBePlayed.name} ${cardToBePlayed.subName} on ${cardToBePlayedUpon.name} ${cardToBePlayed.subName} ${cardToBePlayed.inkCost} from ${inkwell}`)
