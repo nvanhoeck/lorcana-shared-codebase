@@ -105,5 +105,10 @@ export type Card = {
         strength: number
         willpower: number
         lore: number
+    },
+    subtractStatsAtEndOfTurn: {
+        strength: number
+        willpower: number
+        lore: number
     }
 }
