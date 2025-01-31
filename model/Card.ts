@@ -1,4 +1,5 @@
 import type {Sphere} from "./Sphere";
+import {Actions} from "./Actions";
 
 export type CardType = 'Character' | 'Action' | 'Song' | 'Item' | 'Location'
 export type Keywords =
@@ -64,7 +65,7 @@ export const isStaticAbility = (c: AbilityObject): c is StaticAbility => {
 }
 
 export type TriggeredAbility = {
-    name: 'MUSICAL DEBUT' | 'WELL OF SOULS' | 'HORSE KICK',
+    name: 'MUSICAL DEBUT' | 'WELL OF SOULS' | 'HORSE KICK' | 'WE CAN FIX IT',
     type: "triggered"
 }
 export const isTriggeredAbility = (c: AbilityObject): c is TriggeredAbility => {
@@ -107,7 +108,6 @@ export type Card = {
         willpower: number
         lore: number
         ink: number
-        // TODO what about duplicates?
         applied: (KeywordAbility['keyword'] | StaticAbility['name'] | TriggeredAbility['name'] | ActivatedAbility['name']) []
     },
     subtractStatsAtEndOfTurn: {
@@ -115,7 +115,8 @@ export type Card = {
         willpower: number
         lore: number
         ink: number
-        // TODO what about duplicates?
-        applied:  (KeywordAbility['keyword'] | StaticAbility['name'] | TriggeredAbility['name'] | ActivatedAbility['name']) []
-    }
+        applied: (KeywordAbility['keyword'] | StaticAbility['name'] | TriggeredAbility['name'] | ActivatedAbility['name']) []
+    },
+    disabled: Actions[]
+    resetDisabledAtEndOfTurn: Actions[]
 }
