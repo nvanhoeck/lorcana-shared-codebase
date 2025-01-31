@@ -1,17 +1,77 @@
 import {type Card} from "../Card";
 
+function calculateLessLoreBasedOnNewCard(activeRow: Card[], waitingRow: Card[], card: Card) {
+    const allVillainsInActiveRow = activeRow.filter((c) => c.subTypes.includes('Villain'))
+    const allVillainsInWaitingRow = waitingRow.filter((c) => c.subTypes.includes('Villain'))
+
+    const differenceInApplicableVillains = allVillainsInActiveRow.length + allVillainsInWaitingRow.length - card.statChanges.applied.filter(n => n === 'SINISTER PLOT').length
+
+    card.statChanges.lore += differenceInApplicableVillains
+    card.subtractStatsAtEndOfTurn.lore += differenceInApplicableVillains
+    // Apply the amount of times a villain is found
+    for (let i = 0; i < -differenceInApplicableVillains; i++) {
+        const index1 = card.statChanges.applied.lastIndexOf('SINISTER PLOT');
+        if (index1 !== -1) card.statChanges.applied.splice(index1, 1);
+
+        const index2 = card.subtractStatsAtEndOfTurn.applied.lastIndexOf('SINISTER PLOT');
+        if (index2 !== -1) card.subtractStatsAtEndOfTurn.applied.splice(index2, 1);
+    }
+}
+
+function calculateAdditionalLoreBasedOnNewCard(activeRow: Card[], waitingRow: Card[], card: Card) {
+    const allVillainsInActiveRow = activeRow.filter((c) => c.subTypes.includes('Villain'))
+    const allVillainsInWaitingRow = waitingRow.filter((c) => c.subTypes.includes('Villain'))
+
+    const differenceInApplicableVillains = allVillainsInActiveRow.length + allVillainsInWaitingRow.length - card.statChanges.applied.filter(n => n === 'SINISTER PLOT').length
+
+    card.statChanges.lore += differenceInApplicableVillains
+    card.subtractStatsAtEndOfTurn.lore += differenceInApplicableVillains
+    // Apply the amount of times a villain is found
+    for (let i = 0; i < differenceInApplicableVillains; i++) {
+        card.statChanges.applied.push('SINISTER PLOT')
+        card.subtractStatsAtEndOfTurn.applied.push('SINISTER PLOT')
+    }
+
+    allVillainsInActiveRow.forEach((c) => c.providesEffects.push('SINISTER PLOT'))
+    allVillainsInWaitingRow.forEach((c) => c.providesEffects.push('SINISTER PLOT'))
+
+}
+
+function calculateNewLoreBasedOnZeroStart(activeRow: Card[], waitingRow: Card[], card: Card) {
+    let doNotCountItself = 1
+
+    const allVillainsInActiveRow = activeRow.filter((c) => c.subTypes.includes('Villain'))
+    const allVillainsInWaitingRow = waitingRow.filter((c) => c.subTypes.includes('Villain'))
+
+    const loreChange = allVillainsInActiveRow.length + allVillainsInWaitingRow.length - doNotCountItself
+
+    card.statChanges.lore += loreChange
+    card.subtractStatsAtEndOfTurn.lore += loreChange
+    // Apply the amount of times a villain is found
+    for (let i = 0; i < allVillainsInActiveRow.length + allVillainsInWaitingRow.length; i++) {
+        card.statChanges.applied.push('SINISTER PLOT')
+        card.subtractStatsAtEndOfTurn.applied.push('SINISTER PLOT')
+    }
+
+    allVillainsInActiveRow.forEach((c) => c.providesEffects.push('SINISTER PLOT'))
+    allVillainsInWaitingRow.forEach((c) => c.providesEffects.push('SINISTER PLOT'))
+
+}
+
+
 export const sinisterPlot = (activeRow: Card[], waitingRow: Card[], card: Card) => {
-    // TODO we have to revise this
-    // when a new villain is played, sinisterPlot needs to be updated. Does this mean we need to keep track of all changes done by a stat
-    // and do we need to also add a cardId + cardIdx? So double cards can do double effect? Maybe not for static
-    // but for something like support
-    const allVillainsInActiveRow = activeRow.filter((c) => c.subTypes.includes('Villain')).length
-    const allVillainsInWaitingRow = waitingRow.filter((c) => c.subTypes.includes('Villain')).length
-    const doNotCountItself = 1
+    // First situation, after reset
+    const allVillainsInActiveRow = activeRow.filter((c) => c.subTypes.includes('Villain'))
+    const allVillainsInWaitingRow = waitingRow.filter((c) => c.subTypes.includes('Villain'))
+    const ammountOfApplicationsIsLessThenAmountOfVillains = card.statChanges.applied.filter(n => n === 'SINISTER PLOT').length < (allVillainsInWaitingRow.length + allVillainsInActiveRow.length);
+    const ammountOfApplicationsIsGreaterThenAmountOfVillains = card.statChanges.applied.filter(n => n === 'SINISTER PLOT').length > (allVillainsInWaitingRow.length + allVillainsInActiveRow.length);
 
-
-    card.statChanges.lore += allVillainsInActiveRow + allVillainsInWaitingRow - doNotCountItself
-    card.subtractStatsAtEndOfTurn.lore += allVillainsInActiveRow + allVillainsInWaitingRow - doNotCountItself
-    card.statChanges.applied.push('SINISTER PLOT')
-    card.subtractStatsAtEndOfTurn.applied.push('SINISTER PLOT')
+    if (!card.statChanges.applied.includes('SINISTER PLOT')) {
+        calculateNewLoreBasedOnZeroStart(activeRow, waitingRow, card)
+    } else if (ammountOfApplicationsIsLessThenAmountOfVillains) {
+        calculateAdditionalLoreBasedOnNewCard(activeRow, waitingRow, card)
+    } else if (ammountOfApplicationsIsGreaterThenAmountOfVillains) {
+        calculateLessLoreBasedOnNewCard(activeRow, waitingRow, card)
+    }
+    // ELSE ok
 }

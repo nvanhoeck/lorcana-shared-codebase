@@ -18,11 +18,13 @@ export const shift = (player: Player, cardToPlayIdx: number, cardToPlayUponIdx: 
     player.hand[cardToPlayIdx].subtractStatsAtEndOfTurn.lore = player.activeRow[cardToPlayUponIdx].subtractStatsAtEndOfTurn.lore
     player.hand[cardToPlayIdx].subtractStatsAtEndOfTurn.ink = player.activeRow[cardToPlayUponIdx].subtractStatsAtEndOfTurn.ink
     player.hand[cardToPlayIdx].subtractStatsAtEndOfTurn.applied = player.activeRow[cardToPlayUponIdx].subtractStatsAtEndOfTurn.applied
+    // TODO reevaluate?
+    player.hand[cardToPlayIdx].providesEffects = player.activeRow[cardToPlayUponIdx].providesEffects
     transferElement(player.activeRow, player.banishedPile, cardToPlayUponIdx)
     transferElement(player.hand, player.activeRow, cardToPlayIdx)
 }
 
-export const canBeShiftedUpon = (cardName: string, card:Card) => {
+export const canBeShiftedUpon = (cardName: string, card: Card) => {
     return card.name === cardName
 }
 
@@ -42,8 +44,8 @@ export const shiftCost = (c: Card) => {
 export const defineNextStateByShifting = (cardToBePlayed: Card, cardToBePlayedUpon: Card, player: Player, playerGameState: PlayerGameState): PlayerGameState => {
     return {
         ...playerGameState,
-        hand:{
-            handSizeRange: defineCardAmountRange(player.hand.length -1)
+        hand: {
+            handSizeRange: defineCardAmountRange(player.hand.length - 1)
         },
         inkTotal: player.inkTotal - shiftCost(cardToBePlayed),
         fieldState: {

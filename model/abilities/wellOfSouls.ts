@@ -12,8 +12,8 @@ export const wellOfSouls = (banishedPile: Card[]) => {
     return steps
 }
 
-const pickACard = (cardsToChooseFrom: Card[], hand:Card[], idx: number) => {
-    if(idx >= 0) {
+const pickACard = (cardsToChooseFrom: Card[], hand: Card[], idx: number) => {
+    if (idx >= 0) {
         const chosenCard = cardsToChooseFrom[idx];
         chosenCard.statChanges.applied = []
         chosenCard.statChanges.ink = 0
@@ -27,9 +27,7 @@ const pickACard = (cardsToChooseFrom: Card[], hand:Card[], idx: number) => {
         chosenCard.damage = 0
         chosenCard.readied = true
         chosenCard.canBeReadiedDuringReadyPhase = true
-        if(chosenCard.type !== 'Song') {
-            throw new Error('You are not allowed to pick a non song card with Musical Debut.')
-        }
+        chosenCard.providesEffects = []
         hand.push(chosenCard)
     }
 }

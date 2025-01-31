@@ -101,6 +101,7 @@ export type Card = {
     damage: number
     abilities: (KeywordAbility | StaticAbility | TriggeredAbility | ActivatedAbility) []
     subTypes: SubType[]
+    providesEffects: (KeywordAbility['keyword'] | StaticAbility['name'] | TriggeredAbility['name'] | ActivatedAbility['name']) []
     statChanges: {
         strength: number
         willpower: number

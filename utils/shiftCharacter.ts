@@ -4,7 +4,7 @@ import {type Player} from "../model/Player";
 
 export const shiftCharacterCard = (player: Player, hand: Card[], activeRow: Card[], banishedPile: Card[], cardToBePlayedIdx: number, cardToBePlayedUponIdx: number, inkwell: number) => {
     const cardToBePlayed = hand[cardToBePlayedIdx]
-    const cardToBePlayedUpon = hand[cardToBePlayedUponIdx]
+    const cardToBePlayedUpon = activeRow[cardToBePlayedUponIdx]
     const shiftAbility = cardToBePlayed.abilities.find((a) => isKeywordAbility(a) && a.keyword === 'Shift')
     console.log(shiftAbility)
     console.log((cardToBePlayed.name !== cardToBePlayedUpon.name))
@@ -15,7 +15,7 @@ export const shiftCharacterCard = (player: Player, hand: Card[], activeRow: Card
         throw new Error("Trying to shift while not having enough ink")
     }
     if ((shiftAbility as KeywordAbility).keywordValueNumber <= inkwell) {
-        shift(player, cardToBePlayedUponIdx, cardToBePlayedUponIdx)
+        shift(player, cardToBePlayedIdx, cardToBePlayedUponIdx)
         return inkwell - shiftCost(cardToBePlayed)
     } else {
         throw new Error(`Cannot shift ${cardToBePlayed.name} ${cardToBePlayed.subName} on ${cardToBePlayedUpon.name} ${cardToBePlayed.subName} ${cardToBePlayed.inkCost} from ${inkwell}`)
