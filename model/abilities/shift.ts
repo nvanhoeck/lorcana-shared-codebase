@@ -8,6 +8,16 @@ export const shift = (player: Player, cardToPlayIdx: number, cardToPlayUponIdx: 
     player.hand[cardToPlayIdx].readied = player.activeRow[cardToPlayUponIdx].readied
     player.hand[cardToPlayIdx].damage = player.activeRow[cardToPlayUponIdx].damage
     player.hand[cardToPlayIdx].canBeReadiedDuringReadyPhase = player.activeRow[cardToPlayUponIdx].canBeReadiedDuringReadyPhase
+    player.hand[cardToPlayIdx].statChanges.strength = player.activeRow[cardToPlayUponIdx].statChanges.strength
+    player.hand[cardToPlayIdx].statChanges.willpower = player.activeRow[cardToPlayUponIdx].statChanges.willpower
+    player.hand[cardToPlayIdx].statChanges.lore = player.activeRow[cardToPlayUponIdx].statChanges.lore
+    player.hand[cardToPlayIdx].statChanges.ink = player.activeRow[cardToPlayUponIdx].statChanges.ink
+    player.hand[cardToPlayIdx].statChanges.applied = player.activeRow[cardToPlayUponIdx].statChanges.applied
+    player.hand[cardToPlayIdx].subtractStatsAtEndOfTurn.strength = player.activeRow[cardToPlayUponIdx].subtractStatsAtEndOfTurn.strength
+    player.hand[cardToPlayIdx].subtractStatsAtEndOfTurn.willpower = player.activeRow[cardToPlayUponIdx].subtractStatsAtEndOfTurn.willpower
+    player.hand[cardToPlayIdx].subtractStatsAtEndOfTurn.lore = player.activeRow[cardToPlayUponIdx].subtractStatsAtEndOfTurn.lore
+    player.hand[cardToPlayIdx].subtractStatsAtEndOfTurn.ink = player.activeRow[cardToPlayUponIdx].subtractStatsAtEndOfTurn.ink
+    player.hand[cardToPlayIdx].subtractStatsAtEndOfTurn.applied = player.activeRow[cardToPlayUponIdx].subtractStatsAtEndOfTurn.applied
     transferElement(player.activeRow, player.banishedPile, cardToPlayUponIdx)
     transferElement(player.hand, player.activeRow, cardToPlayIdx)
 }

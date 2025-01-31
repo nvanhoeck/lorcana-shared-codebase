@@ -55,7 +55,7 @@ export const isKeywordAbility = (c: AbilityObject): c is KeywordAbility => {
 }
 
 export type StaticAbility = {
-    name: 'VOICELESS' | "SINISTER PLOT",
+    name: 'VOICELESS' | "SINISTER PLOT" | "LOYAL",
     type: "static"
 }
 
@@ -105,10 +105,16 @@ export type Card = {
         strength: number
         willpower: number
         lore: number
+        ink: number
+        // TODO what about duplicates?
+        applied: (KeywordAbility['keyword'] | StaticAbility['name'] | TriggeredAbility['name'] | ActivatedAbility['name']) []
     },
     subtractStatsAtEndOfTurn: {
         strength: number
         willpower: number
         lore: number
+        ink: number
+        // TODO what about duplicates?
+        applied:  (KeywordAbility['keyword'] | StaticAbility['name'] | TriggeredAbility['name'] | ActivatedAbility['name']) []
     }
 }

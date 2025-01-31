@@ -6,7 +6,9 @@ export const shiftCharacterCard = (player: Player, hand: Card[], activeRow: Card
     const cardToBePlayed = hand[cardToBePlayedIdx]
     const cardToBePlayedUpon = hand[cardToBePlayedUponIdx]
     const shiftAbility = cardToBePlayed.abilities.find((a) => isKeywordAbility(a) && a.keyword === 'Shift')
-    if (cardToBePlayed.name !== cardToBePlayedUpon.name || !shiftAbility) {
+    console.log(shiftAbility)
+    console.log((cardToBePlayed.name !== cardToBePlayedUpon.name))
+    if ((cardToBePlayed.name !== cardToBePlayedUpon.name) || !shiftAbility) {
         throw new Error("Trying to shift on not same named card or without shift ability")
     }
     if (shiftCost(cardToBePlayed) > inkwell) {

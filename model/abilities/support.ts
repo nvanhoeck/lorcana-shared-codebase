@@ -7,6 +7,8 @@ export const support = (card: Card, player: Player, targetCardIdx?: number) => {
         if (cardToImprove) {
             cardToImprove.statChanges.strength += card!.strength
             cardToImprove.subtractStatsAtEndOfTurn.strength += card!.strength
+            cardToImprove.statChanges.applied.push('Support')
+            cardToImprove.subtractStatsAtEndOfTurn.applied.push('Support')
         }
     }
     return player
