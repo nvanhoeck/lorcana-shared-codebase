@@ -1,5 +1,5 @@
 import type {Sphere} from "./Sphere";
-import {Actions} from "./Actions";
+import type {Actions} from "./Actions";
 
 export type CardType = 'Character' | 'Action' | 'Song' | 'Item' | 'Location'
 export type Keywords =
@@ -65,7 +65,7 @@ export const isStaticAbility = (c: AbilityObject): c is StaticAbility => {
 }
 
 export type TriggeredAbility = {
-    name: 'MUSICAL DEBUT' | 'WELL OF SOULS' | 'HORSE KICK' | 'WE CAN FIX IT',
+    name: 'MUSICAL DEBUT' | 'WELL OF SOULS' | 'HORSE KICK' | 'WE CAN FIX IT' | 'AND TWO FOR TEA!',
     type: "triggered"
 }
 export const isTriggeredAbility = (c: AbilityObject): c is TriggeredAbility => {
