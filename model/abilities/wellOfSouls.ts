@@ -28,6 +28,7 @@ const pickACard = (cardsToChooseFrom: Card[], hand: Card[], idx: number) => {
         chosenCard.readied = true
         chosenCard.canBeReadiedDuringReadyPhase = true
         chosenCard.providesEffects = []
+        chosenCard.triggeredAbilities = []
         hand.push(chosenCard)
     }
 }

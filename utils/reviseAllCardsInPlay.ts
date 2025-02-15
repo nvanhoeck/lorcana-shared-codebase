@@ -2,6 +2,7 @@ import type {Player} from "../model/Player";
 import {type Card, isStaticAbility, type StaticAbility} from "../model/Card";
 import {loyal, sinisterPlot} from "../model/abilities";
 
+// TODO refactor?
 export const reviseAllCardsInPlay = (player: Player, hostilePlayer: Player) => {
     player.activeRow.forEach((c) => {
         c.abilities.filter((a) => isStaticAbility(a))

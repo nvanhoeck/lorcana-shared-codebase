@@ -20,6 +20,7 @@ export const shift = (player: Player, cardToPlayIdx: number, cardToPlayUponIdx: 
     player.hand[cardToPlayIdx].subtractStatsAtEndOfTurn.applied = player.activeRow[cardToPlayUponIdx].subtractStatsAtEndOfTurn.applied
     // TODO reevaluate?
     player.hand[cardToPlayIdx].providesEffects = player.activeRow[cardToPlayUponIdx].providesEffects
+    player.hand[cardToPlayIdx].triggeredAbilities = player.activeRow[cardToPlayUponIdx].triggeredAbilities
     transferElement(player.activeRow, player.banishedPile, cardToPlayUponIdx)
     transferElement(player.hand, player.activeRow, cardToPlayIdx)
 }

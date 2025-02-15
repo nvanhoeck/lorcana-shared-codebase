@@ -1,6 +1,7 @@
 import type {Sphere} from "./Sphere";
 import type {Actions} from "./Actions";
 
+export type AbilitiesAndKeywordNames = (KeywordAbility['keyword'] | StaticAbility['name'] | TriggeredAbility['name'] | ActivatedAbility['name'])
 export type CardType = 'Character' | 'Action' | 'Song' | 'Item' | 'Location'
 export type Keywords =
     'Challenger'
@@ -102,20 +103,21 @@ export type Card = {
     damage: number
     abilities: (KeywordAbility | StaticAbility | TriggeredAbility | ActivatedAbility) []
     subTypes: SubType[]
-    providesEffects: (KeywordAbility['keyword'] | StaticAbility['name'] | TriggeredAbility['name'] | ActivatedAbility['name']) []
+    providesEffects: AbilitiesAndKeywordNames []
+    triggeredAbilities: AbilitiesAndKeywordNames []
     statChanges: {
         strength: number
         willpower: number
         lore: number
         ink: number
-        applied: (KeywordAbility['keyword'] | StaticAbility['name'] | TriggeredAbility['name'] | ActivatedAbility['name']) []
+        applied: AbilitiesAndKeywordNames []
     },
     subtractStatsAtEndOfTurn: {
         strength: number
         willpower: number
         lore: number
         ink: number
-        applied: (KeywordAbility['keyword'] | StaticAbility['name'] | TriggeredAbility['name'] | ActivatedAbility['name']) []
+        applied: AbilitiesAndKeywordNames []
     },
     disabled: Actions[]
     resetDisabledAtEndOfTurn: Actions[]
