@@ -9,6 +9,7 @@ export const bodyguard = (player: Player, cardToBePlayedIdx: number) => {
     const activeRow = player.activeRow
     hand[cardToBePlayedIdx].readied = false
     hand[cardToBePlayedIdx].canBeReadiedDuringReadyPhase = true
+    player.inkTotal -= hand[cardToBePlayedIdx].inkCost
     transferElement(hand, activeRow, cardToBePlayedIdx)
     return player
 }

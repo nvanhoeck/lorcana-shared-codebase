@@ -33,5 +33,5 @@ export const andTwoForTeaState = (playerGameState: PlayerGameState, player: Play
 }
 
 export const andTwoForTeaCanBeExecuted = (playerActiveRow: Card[]) => {
-    return playerActiveRow.filter(andTwoForTeaCondition).length > 0
+    return playerActiveRow.filter(andTwoForTeaCondition).length >= 1
 }
